@@ -1,13 +1,36 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Home from './src/screens/Home';
+import Login from './src/screens/Login';
+
+export type RootStackParamList = {
+  Home: undefined;
+  Login: undefined;
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <Text>Who is your daddy and what does he do?</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen 
+          name='Home'
+          component={Home}
+          options={{
+            title: "Task Manager"
+          }}/>
+        <Stack.Screen 
+          name='Login'
+          component={Login}
+          options={{
+            title: "Login"
+          }}/>
+
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
