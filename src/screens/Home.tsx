@@ -25,4 +25,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    button: {
+        flex: 1,
+        backgroundColor: 'blue',
+        alignItems: 'center',
+        justifyContent: 'center'
+    }
 })
