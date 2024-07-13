@@ -15,11 +15,12 @@ export type RootStackParamList = {
   Login: undefined;
   Welcome: undefined;
   TaskList: undefined;
+  InsideLayout: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-const InsideStack = createNativeStackNavigator();
+const InsideStack = createNativeStackNavigator<RootStackParamList>();
 
 function InsideLayout() {
   return (
@@ -70,11 +71,11 @@ export default function App() {
       <Stack.Navigator initialRouteName='Login'>
         { user ? (
           <Stack.Screen 
-          name='InsideLayout'
-          component={InsideLayout}
-          options={{
-            headerShown: false
-          }}/>
+            name='InsideLayout'
+            component={InsideLayout}
+            options={{
+              headerShown: false
+            }}/>
           ) : (
             <Stack.Screen 
               name='Login'

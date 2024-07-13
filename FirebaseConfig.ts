@@ -2,17 +2,18 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+require('dotenv').config()
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyB3_ouIIuWXdg0dh2uTvjJ5XUDbA7fsp48",
-  authDomain: "native-task-manager.firebaseapp.com",
-  projectId: "native-task-manager",
-  storageBucket: "native-task-manager.appspot.com",
-  messagingSenderId: "410021381525",
-  appId: "1:410021381525:web:effe548380065a05e7629c"
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  projectId: process.env.PROJECT_ID,
+  storageBucket: process.env.BUCKET,
+  messagingSenderId: process.env.SENDER_ID,
+  appId: process.env.APP_ID
 };
 
 // Initialize Firebase
