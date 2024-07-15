@@ -8,6 +8,7 @@ import Home from './src/screens/Home';
 import Login from './src/screens/Login';
 import Welcome from './src/screens/Welcome';
 import TaskList from './src/screens/TaskList';
+import Detail from './src/screens/Detail';
 import { FIREBASE_AUTH } from './FirebaseConfig';
 
 export type RootStackParamList = {
@@ -27,6 +28,7 @@ function InsideLayout() {
     <InsideStack.Navigator>
       <InsideStack.Screen name="Welcome" component={Welcome}/>
       <InsideStack.Screen name="TaskList" component={TaskList}/>
+      <InsideStack.Screen name="Detail" component={Detail}/>
     </InsideStack.Navigator>
   )
 }

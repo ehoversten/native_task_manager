@@ -5,17 +5,21 @@ import { collection, onSnapshot } from "firebase/firestore";
 import { onAuthStateChanged } from 'firebase/auth';
 import TaskForm from '../components/TaskForm';
 
+import { useNavigation } from '@react-navigation/native';
+
 export default function TaskList() {
+    const navigation = useNavigation();
 
     const auth = FIREBASE_AUTH;
     // console.log("Auth: ", auth)
 
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [currentTask, setCurrentTask] = useState({})
 
     useEffect(() => {
         setLoading(true);
-        const tasksData = collection(FIRESTORE_DB, 'tasks')
+        const tasksData = collection(FIRESTORE_DB, 'tasks');
         console.log("Data: ", tasksData);
 
         const subscriber = onSnapshot(tasksData, (snapshot) => {
@@ -33,6 +37,11 @@ export default function TaskList() {
         return () => subscriber();
     }, [])
 
+    const viewDetails = (item) => {
+        console.log("Task ID: ", item.id);
+        navigation.navigate("Detail", { task: item });
+    }
+
     return (
         <SafeAreaView>
 
@@ -41,7 +50,7 @@ export default function TaskList() {
                 <FlatList 
                     data={tasks}
                     renderItem={({ item }) => (
-                        <Pressable style={styles.card} onPress={() => console.log("Selecting Task: ", item.id)}>
+                        <Pressable style={styles.card} onPress={viewDetails(item)}>
                             <Text>{item.title}</Text>
                             <Text>{item.description}</Text>
                             <Text>{item.status}</Text>
