@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button } from 'react-native'
+import { StyleSheet, Text, View, Button, ScrollView, FlatList, Pressable , SafeAreaView} from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { FIRESTORE_DB, FIREBASE_AUTH } from '../../FirebaseConfig';
 import { collection, onSnapshot } from "firebase/firestore"; 
@@ -9,14 +9,6 @@ export default function TaskList() {
 
     const auth = FIREBASE_AUTH;
     // console.log("Auth: ", auth)
-
-    // onAuthStateChanged(FIREBASE_AUTH, (user) => {
-    //     if(user) {
-    //         console.log("user: ", user)
-    //     } else {
-
-    //     }
-    // })
 
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -42,17 +34,30 @@ export default function TaskList() {
     }, [])
 
     return (
-        <View>
-            <TaskForm user={auth}/>
-            { tasks.map(task => (
-                <View key={task.id} style={styles.card}>
-                    <Text>{task.title}</Text>
-                    <Text>{task.description}</Text>
-                    <Text>{task.status}</Text>
-                    <Text>{task.user_id}</Text>
-                </View>
-            ))}
-        </View>
+        <SafeAreaView>
+
+            <View>
+                <TaskForm user={auth}/>
+                <FlatList 
+                    data={tasks}
+                    renderItem={({ item }) => (
+                        <Pressable style={styles.card} onPress={() => console.log("Selecting Task: ", item.id)}>
+                            <Text>{item.title}</Text>
+                            <Text>{item.description}</Text>
+                            <Text>{item.status}</Text>
+                            <Text>{item.user_id}</Text>
+                        </Pressable>
+                    )}
+                    ItemSeparatorComponent={<View style={{ height: 15 }}/>}
+                    ListEmptyComponent={(
+                        <View>
+                            <Text>No Tasks</Text>
+                        </View>
+                    )}
+                    />
+            </View>
+
+        </SafeAreaView>
     )
 }
 
@@ -60,8 +65,9 @@ const styles = StyleSheet.create({
     card: {
         borderWidth: 1,
         borderRadius: 8,
-        padding: 10,
-        margin: 8,
-        backgroundColor: "#bbb"
+        padding: 15,
+        // margin: 10,
+        marginHorizontal: 20,
+        backgroundColor: "#b3b3b3"
     }
 })
