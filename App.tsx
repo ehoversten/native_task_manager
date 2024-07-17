@@ -44,33 +44,8 @@ export default function App() {
   }, [])
 
   return (
-    // <NavigationContainer>
-    //   <Stack.Navigator>
-    //     <Stack.Screen 
-    //       name='Home'
-    //       component={Home}
-    //       options={{
-    //         title: "Task Manager"
-    //       }}/>
-    //     { user ? (
-    //       <Stack.Screen 
-    //       name='Welcome'
-    //       component={Welcome}
-    //       options={{
-    //         title: "Welcome"
-    //       }}/>
-    //       ) : (
-    //         <Stack.Screen 
-    //           name='Login'
-    //           component={Login}
-    //           options={{
-    //             title: "Login"
-    //           }}/>
-    //     )}
-    //   </Stack.Navigator>
-    // </NavigationContainer>
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Login'>
+      <Stack.Navigator initialRouteName='Home'>
         { user ? (
           <Stack.Screen 
             name='InsideLayout'

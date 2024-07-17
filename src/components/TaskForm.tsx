@@ -16,7 +16,7 @@ export default function TaskForm({ user }) {
 
     const addTask = async () => {
       const newTask = {
-        id: uuid.v4(),
+        task_id: uuid.v4(),
         title: title,
         description: description,
         status: false,
@@ -26,9 +26,13 @@ export default function TaskForm({ user }) {
       }
 
       // console.log("New Task: ", newTask)
+      // const collectionRef = collection(FIRESTORE_DB, 'tasks');
+      const collectionRef = collection(FIRESTORE_DB, 'native-tasks');
+      console.log("Collection Ref: ", collectionRef)
 
-      const data = await addDoc(collection(FIRESTORE_DB, 'tasks'), newTask);
-      // console.log("New: ", data);
+      const data = await addDoc(collectionRef, newTask)
+      console.log("New: ", data);
+      console.log("New: ", data.id);
       // Trigger Reminder 
 
       setTitle('');
@@ -72,5 +76,8 @@ const styles = StyleSheet.create({
       padding: 20,
       backgroundColor: '#fff',
       margin: 10
+    },
+    multiline: {
+      minHeight: 100
     }
 })
