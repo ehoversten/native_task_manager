@@ -7,16 +7,14 @@ import uuid from 'react-native-uuid';
 
 export default function TaskForm({ user }) {
 
-  // console.log("Current User: ", user.currentUser);
-  // console.log("User email: ", user.currentUser.email);
-  // console.log("User ID: ", user.currentUser.uid);
-
     const [title, setTitle] = useState<String>("");
     const [description, setDescription] = useState<String>("");
 
     const addTask = async () => {
+
+    try {
       const newTask = {
-        task_id: uuid.v4(),
+        // task_id: uuid.v4(),
         title: title,
         description: description,
         status: false,
@@ -24,20 +22,23 @@ export default function TaskForm({ user }) {
         completed_at: null,
         user_id: user.currentUser.uid
       }
-
-      // console.log("New Task: ", newTask)
-      // const collectionRef = collection(FIRESTORE_DB, 'tasks');
+      
       const collectionRef = collection(FIRESTORE_DB, 'native-tasks');
-      console.log("Collection Ref: ", collectionRef)
+      // console.log("Collection Ref: ", collectionRef)
 
       const data = await addDoc(collectionRef, newTask)
-      console.log("New: ", data);
-      console.log("New: ", data.id);
+      // console.log("New: ", data);
+      // console.log("New: ", data.id);
+
       // Trigger Reminder 
 
       setTitle('');
       setDescription('');
+    } catch (error) {
+      console.log("Error New Task: ", error)
     }
+
+  }
 
   return (
     <View style={styles.form}>
@@ -54,7 +55,7 @@ export default function TaskForm({ user }) {
         // numberOfLines={4}
         // maxLength={40}
         onChangeText={(text: String) => setDescription(text)}/>
-      <Button onPress={addTask} title="Add Task"/>
+      <Button onPress={addTask} title="Add Task" disabled={ title == "" || description == ""}/>
     </View>
   )
 }
