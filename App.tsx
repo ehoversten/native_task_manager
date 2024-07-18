@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { User, onAuthStateChanged } from 'firebase/auth';
@@ -10,6 +10,7 @@ import Welcome from './src/screens/Welcome';
 import TaskList from './src/screens/TaskList';
 import Detail from './src/screens/Detail';
 import { FIREBASE_AUTH } from './FirebaseConfig';
+import LeaderBoard from './src/screens/LeaderBoard';
 
 export type RootStackParamList = {
   Home: undefined;
@@ -27,6 +28,7 @@ function InsideLayout() {
   return (
     <InsideStack.Navigator>
       <InsideStack.Screen name="Welcome" component={Welcome}/>
+      <InsideStack.Screen name="LeaderBoard" component={LeaderBoard}/>
       <InsideStack.Screen name="TaskList" component={TaskList}/>
       <InsideStack.Screen name="Detail" component={Detail}/>
     </InsideStack.Navigator>

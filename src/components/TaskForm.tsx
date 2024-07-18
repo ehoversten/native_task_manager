@@ -51,9 +51,6 @@ export default function TaskForm({ user }) {
         value={description}
         style={styles.input} 
         placeholder="Enter Task Description" 
-        // multiline
-        // numberOfLines={4}
-        // maxLength={40}
         onChangeText={(text: String) => setDescription(text)}/>
       <Button onPress={addTask} title="Add Task" disabled={ title == "" || description == ""}/>
     </View>
