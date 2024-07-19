@@ -11,7 +11,11 @@ export default function Welcome({navigation}: WelcomeProps) {
     <View style={styles.container}>
       <Text>Welcome</Text>
       <Button 
-        title='TaskList'
+        title='Go to Leader Board'
+        onPress={() => navigation.navigate('LeaderBoard')}
+        />
+      <Button 
+        title='Task List'
         onPress={() => navigation.navigate('TaskList')} />
       <Button 
         title='Logout'
